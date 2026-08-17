@@ -1,0 +1,492 @@
+[
+  {
+    "time": "00:00:00",
+    "speaker": "Chelsea Finn",
+    "en": "Hi everyone. I'm really excited to talk about developing general-purpose robots and how we might truly develop and bring intelligence into the physical world. So, to start off, I'd like to talk about this problem, which is that if you want to truly solve a robotics application, you essentially need to build an entire company around that application. You need to build a different company for logistics, for wet lab automation, for robots in kitchens, for surgical robots, and so on."
+  },
+  {
+    "time": "00:00:31",
+    "speaker": "Chelsea Finn",
+    "en": "And this is really, really hard to do because that company needs to make new hardware, develop custom software, design unique movement primitives for that application, handle edge cases, and so on. And you have to do all of that from scratch if you want to solve a robotics problem. As a result, a lot of robotics companies haven't been very successful in actually bringing robots into the physical world successfully in our daily lives."
+  },
+  {
+    "time": "00:00:57",
+    "speaker": "Chelsea Finn",
+    "en": "I co-founded a company called Physical Intelligence that's trying to solve this problem. In particular, we're trying to develop a general-purpose model that can enable any robot to do any task in any environment. We think that this sort of generalist model may work better and be easier to use than purpose-built models, just like we've seen in the development of foundation models for language and other applications."
+  },
+  {
+    "time": "00:01:24",
+    "speaker": "Chelsea Finn",
+    "en": "For example, if you want to build a coding assistant, you don't nowadays develop something specifically for coding; you develop and build on models that were trained on large amounts of data, not just on code. Essentially, this is the problem of trying to develop these sorts of foundation models and bring this sort of intelligence into the physical world rather than the digital world where they largely are today. So how do we do this? In this talk, I'd like to talk about how we go about doing this."
+  },
+  {
+    "time": "00:01:52",
+    "speaker": "Chelsea Finn",
+    "en": "If we were to take a lesson from language models, we know that language models have taught us the importance of scale. So one possible conclusion would be that perhaps scale is the most important ingredient for developing these models. If you were to say this conclusion is true, then you might look to certain data sources for large-scale data. For example, we might look at data from industrial automation, where you get tons and tons of data of robots doing tasks over and over again like this. But this sort of data isn't going to allow robots to go into disaster zones, make a sandwich, or bag groceries. So this massive scale doesn't have the diversity of behaviors that we need in order to solve this general problem."
+  },
+  {
+    "time": "00:02:42",
+    "speaker": "Chelsea Finn",
+    "en": "Alternatively, maybe we look at data from YouTube, which has also a massive data source and many videos of humans doing tasks that could be useful for training robots. But at the same time, we don't learn how to write by watching other people write, and we don't become expert tennis players by watching Wimbledon. And so, even though there's a massive scale of data here, it's very challenging to use, and there's also a gap between the embodiment of robots and humans."
+  },
+  {
+    "time": "00:03:04",
+    "speaker": "Chelsea Finn",
+    "en": "Lastly, we might look at data from simulation. You can also get a massive scale of data here, but this data lacks realism and also has a gap from reality. So I think the lesson here is that scale is necessary for developing these models that can generalize in open-world conditions, but they're subordinate to actually solving the problem. So you need scale, but it's not sufficient for the entire problem."
+  },
+  {
+    "time": "00:03:28",
+    "speaker": "Chelsea Finn",
+    "en": "At Physical Intelligence, this is an example of a data episode that we've collected. This is in honor of our first anniversary, which was a few months ago. Here you can see a teleoperator in person who's operating some leader arms to control the robot to light a match and light a candle with the match. With this sort of data, we can train robots to do a variety of different tasks."
+  },
+  {
+    "time": "00:03:54",
+    "speaker": "Chelsea Finn",
+    "en": "So what I'd like to talk about is some of our recent results at trying to develop sort of physical intelligence with large-scale real robot data. I should mention this is large-scale by today's robot standards and arguably a minuscule amount of data compared to the sorts of robot data that we should have in the years to come. In particular, we'll be looking at whether robots can do a variety of dextrous long-horizon tasks, whether robots can succeed in places they've never been, and whether robots can respond to open-ended prompts and interjections. Even if you're not excited about robotics, I think that the lessons that we've learned from trying to address these problems are applicable outside of the physical world."
+  },
+  {
+    "time": "00:04:36",
+    "speaker": "Chelsea Finn",
+    "en": "So, can we develop robots that can complete dextrous long-horizon tasks? In particular, in this first part, I'd like to talk about how we trained a Pi Zero foundation model to do this task, which is to unload a dryer and fold laundry. To date, I think this is the most impressive thing that I've seen a robot do in the physical world. It's really hard."
+  },
+  {
+    "time": "00:05:04",
+    "speaker": "Chelsea Finn",
+    "en": "This is an incredibly difficult problem. You can see that it's not perfect. Here is making some miscrops, making some mistakes, but it's really, really hard because you have to deal with the variability in the clothes and the way in which they might be positioned and crumpled, and be able to handle all those sorts of things. As you're doing this task, which takes about 10 minutes for the robot, there's many opportunities to fail—to fail catastrophically. For example, dropping things on the ground, which is hard to recover from. You have to be able to recover from even small mistakes."
+  },
+  {
+    "time": "00:05:34",
+    "speaker": "Chelsea Finn",
+    "en": "I was personally actually working quite a bit on this laundry folding robot along with Michael and Siraj, and of course supported and with contributions from the whole Physical Intelligence team. So how do you even approach this sort of problem? This is a really, really hard thing for a robot to do."
+  },
+  {
+    "time": "00:05:50",
+    "speaker": "Chelsea Finn",
+    "en": "What we did is we started simple. We started with: can a robot fold a single size, single brand shirt? And can a robot dynamically flatten one shirt—again single brand, single sized? If you start simple, this makes the problem quite a bit easier. We collected some data with teleoperation and trained a policy with imitation learning. Our model had around 100 million parameters mapping from images from the robot's cameras to joint target joint positions on the robot arms, and we do this sort of control at 50 hertz on the robot."
+  },
+  {
+    "time": "00:06:24",
+    "speaker": "Chelsea Finn",
+    "en": "We founded the company in mid-March of 2024. A couple months later, after we had set everything up, we were able to get a policy that could fairly reliably fold a single size, single brand shirt. You can see that I'm testing the policy right here. We also wanted to test some dynamic motions because you need to be able to match the control frequency accurately in order to do these sorts of dynamic motions. These were some of our very initial tests at addressing this sort of laundry folding problem."
+  },
+  {
+    "time": "00:06:54",
+    "speaker": "Chelsea Finn",
+    "en": "Then from there, we wanted to make the problem incrementally harder. So instead of starting from the shirt flat on the table, we started in a crumpled position like these. And it turns out that this actually makes it a lot harder. Here are some videos of some of our initial attempts at trying to train the robot to fold these shirts. The robot struggles. The robot does some things that kind of look somewhat sensible but generally isn't able to make progress on the task. With many tests, we frequently were getting 0% success rate in our tests of this system and really struggling to make progress."
+  },
+  {
+    "time": "00:07:32",
+    "speaker": "Chelsea Finn",
+    "en": "So really here, it introduces this challenge of handling the sorts of variability in the ways in which shirts might be crumpled on the table. We had some initial signs of life in late June of last year. In this case, the robot was able to kind of make progress on flattening the shirt. It's also then able to fold the shirt decently well from that initial state. Still not perfect, and as you can see, it takes quite a while to do this. This is a video that was sped up 8x, so not something that you might have the patience for a robot to do."
+  },
+  {
+    "time": "00:08:05",
+    "speaker": "Chelsea Finn",
+    "en": "With some initial signs of life, but also very low success rate, we started to transition to a slightly harder version of the task where the laundry starts in a laundry basket. We also introduced variable size shirts and shorts into the mix. Again, the robot really struggled. So in many of our tests, we were getting 0% success rate across the board, and we're really struggling to actually get the robots to learn how to do these tasks."
+  },
+  {
+    "time": "00:08:31",
+    "speaker": "Chelsea Finn",
+    "en": "At this point, we were trying to consider a lot of different things. We thought that maybe the robot needs memory, needs history in some way. Maybe we need to just train our models for longer. Maybe we should be doing control in end-effector space rather than in joint space of the robot. Maybe our encoders—we knew that there were calibration issues—and maybe we need that calibration to be more consistent. Maybe we need to condition the model on more information about the data. Maybe we need hierarchy because this is a pretty long-horizon task and it needs to break it down into different subtasks. Maybe we need higher resolution images. Maybe we need to introduce interventions in data collection."
+  },
+  {
+    "time": "00:09:02",
+    "speaker": "Chelsea Finn",
+    "en": "A lot of these things we also tried. We had around two to three months of failure where nothing was really working at addressing this task. But then at some point we actually had a bit of a breakthrough, which was that we found one thing that really seemed to make a difference in the robot's ability to do the task. This was actually to take some inspiration from the world of language modeling to actually, instead of just training a policy on all of our data, we pre-train on all the data and then fine-tune on a curated, consistent, high-quality set of demonstration data."
+  },
+  {
+    "time": "00:09:37",
+    "speaker": "Chelsea Finn",
+    "en": "When we did this, we found that the robot was actually able to make progress and a lot more reliably fold articles of clothing. I think that this video was the first video where the robot was able to fold five items in a row and stack them. I went home very excited this day. This was in September of 2024, so multiple months after our initial tests."
+  },
+  {
+    "time": "00:09:59",
+    "speaker": "Chelsea Finn",
+    "en": "Now this is far from perfect. It takes 20 minutes to fold five items of clothes. At the same time though, it kind of suggested that this sort of recipe was able to unlock the capability in the robot to actually fold these articles of clothing. So you can see these sorts of failures here. In this case, it attempted to fold the blue shirt around seven times before eventually actually figuring out how to do that. There's also other failure modes as well. Here's an example where the robot pushes the stack to the corner of the table and decides to kind of fiddle with it a bit, and then eventually slides it off the table, and then it proceeds as if nothing had happened and it's going to continue to fold."
+  },
+  {
+    "time": "00:10:40",
+    "speaker": "Chelsea Finn",
+    "en": "We continue to iterate on this recipe. We selected and worked on our curation strategy for curating a higher quality set of demonstration data. We got it from 20 minutes down to 12 minutes for these five items. This is kind of how we were evaluating how good our robot system was. It still makes mistakes. The fold quality still varies, but it's still significantly better than our previous curation recipe."
+  },
+  {
+    "time": "00:11:03",
+    "speaker": "Chelsea Finn",
+    "en": "Now, at this point, we were still training models largely kind of... we were pre-training and fine-tuning only on laundry data, and we weren't leveraging pre-trained models in the community. There were some folks working at Physical Intelligence that were working on developing a pre-trained model trained on all of the robot data. We then started to try to introduce these models into our recipe."
+  },
+  {
+    "time": "00:11:25",
+    "speaker": "Chelsea Finn",
+    "en": "So we took an open-source vision language model, a three billion parameter model called PaliGemma. Previously the videos were all with like a 100 to 300 million parameters that we're iterating on. This model takes as input images from the robot, also a language command, and then has a diffusion head that's going to attend to all the internal values of the vision language model and, with the joint angles, predict a chunk of 50 actions into the future. So about one second of action steps, and we're using flow matching—a variant of diffusion—to actually output these actions and output continuous actions."
+  },
+  {
+    "time": "00:12:05",
+    "speaker": "Chelsea Finn",
+    "en": "So we took this pre-trained model and instead of pre-training only on laundry, we pre-trained on all of the robot data that we had collected. And then we just fine-tuned it with the same exact post-training recipe that we had developed without using the vision language models. When we did this, we actually saw the robot continue to actually get better when we just plugged in that new pre-trained model."
+  },
+  {
+    "time": "00:12:26",
+    "speaker": "Chelsea Finn",
+    "en": "In the left video, it's able to do five items in nine minutes, which was faster than the 12 minutes we had before. In the right videos, we were testing with some novel clothing items and found that it was also quite efficient at folding multiple items in a row. We also saw as a result there was also more consistent fold quality by using this model that was about 10 times larger and had seen more robot data as input."
+  },
+  {
+    "time": "00:12:51",
+    "speaker": "Chelsea Finn",
+    "en": "To look at a few highlights of this, here's a pair of shorts that the robot hasn't seen before. And this is kind of a tricky scenario where to flatten it, it actually kind of needs to reach under the bottom of the shorts. It's able to do that. It is able to kind of figure out that it should reach under the left part of the shorts in order to eventually flatten it. And then once it actually successfully flattens it, it's able to fold it successfully."
+  },
+  {
+    "time": "00:13:17",
+    "speaker": "Chelsea Finn",
+    "en": "It also has to do something similar at times to fold shirts. So in this case, it needs to actually kind of fold the shirt over on itself, which actually puts it in a more crumpled state arguably, but allows it to find the corners of the shirt and then go ahead and fold it. And then like I mentioned, it also is able to handle unseen clothing items. So here's an example of a shirt with a V-neck that it is able to fold even though this shirt was completely held out and the post-training data set didn't have any V-necks as input in the data set. It's also able to fold shirts with buttons. So it has some degree of generalization to different clothing items."
+  },
+  {
+    "time": "00:13:55",
+    "speaker": "Chelsea Finn",
+    "en": "And then lastly, because this policy is a neural network and it's taking as input the current image, it's able to handle interruptions. So here, Michael is continuing to mess with the robot and the robot figures out that it should put the shirt away while it's trying to fold the other shirt. In this case, Michael's going to continue messing with the robot. So Michael unfolds one side and the robot reacts. Michael goes in again and the robot makes some mistakes here but able to recover. Michael messes it up again. So those are some results of what the robot's able to do."
+  },
+  {
+    "time": "00:14:37",
+    "speaker": "Chelsea Finn",
+    "en": "Now I talked about this pre-training and post-training recipe being really important. We can actually quantitatively measure that and actually make sure that this is actually what's leading to improvement. So, we compared this pre-training and post-training recipe to not using any pre-training and only training on the curated data set, versus no post-training where you're training on all of the data rather than fine-tuning on the curated data set. We evaluated these models in terms of their progress on the task where you make partial progress for getting it out of the bin, which is the easiest part, and then further progress for flattening, folding, and stacking the items."
+  },
+  {
+    "time": "00:15:10",
+    "speaker": "Chelsea Finn",
+    "en": "We see that the pre-training and post-training recipe is able to get far higher performance than omitting pre-training and omitting post-training. Notably, omitting pre-training and post-training is basically able to get it out of the bin and make very little progress after that. Whereas when we combine pre-training and curated post-training, we get far higher performance where it's able to reliably flatten and fold objects."
+  },
+  {
+    "time": "00:15:34",
+    "speaker": "Chelsea Finn",
+    "en": "And then the last thing that I'll mention on this note is that nothing in this recipe is specific to laundry. And so we took the same recipe and fine-tuned on other tasks. So here the task is to clean up a table. And the robot's also able to successfully do this task despite the fact that we primarily were iterating a lot on laundry, but it's able to also apply this recipe to this task."
+  },
+  {
+    "time": "00:15:58",
+    "speaker": "Chelsea Finn",
+    "en": "It also is able to scoop coffee beans into a coffee grinder. This task is pretty hard. It has to construct the bottom part of a cardboard box, which requires quite a bit of dexterity. And then lastly, autonomously lighting a candle with a match, again with this kind of same pre-training and post-training recipe."
+  },
+  {
+    "time": "00:16:22",
+    "speaker": "Chelsea Finn",
+    "en": "This is pointing at this kind of the benefit of foundation models that I alluded to before, which is that to do these different tasks you don't have to start completely from scratch. You can actually leverage pre-training across multiple robots and across multiple tasks. And then we're also able to apply that same recipe to robots at other companies. This is a robot that I've actually never seen in person before. They collected data. They sent the data to us. We fine-tuned our model on their data. We actually didn't even know exactly how the model is being controlled—exactly the representation of their actions—but by fine-tuning the model on this new robot, the model is able to control the robot in order to make a cup of coffee in this case."
+  },
+  {
+    "time": "00:17:07",
+    "speaker": "Chelsea Finn",
+    "en": "So, some takeaways for this part: we were able to independently develop post-training and pre-training and decouple the problem, and then eventually get the best of both. We found that training on all the data doesn't work for complex tasks, and this sort of pre-training and post-training on curated data leads to far better performance. And then we broke up this really hard problem of folding laundry by gradually starting with folding single shirts and going to more and more complex versions of the task."
+  },
+  {
+    "time": "00:17:34",
+    "speaker": "Chelsea Finn",
+    "en": "Now there's a number of limitations here and one limitation I'd like to point out is that these robots inevitably, in this case, were trained in the environments that they were tested. And so this means that in principle you could use these methods to collect a lot of data in one environment and then deploy them in one environment. But ultimately, there's going to be things that change about an environment and scenarios where we would want to actually apply these robots to environments that they've never seen before. And so, how can robots actually succeed in places that they've never been?"
+  },
+  {
+    "time": "00:18:03",
+    "speaker": "Chelsea Finn",
+    "en": "The lesson we've learned from machine learning in other places is that we should collect diverse data. We started by collecting data of tidying bedrooms and kitchens in many different environments. Here's a sample of that data. We collected robot data in homes across San Francisco here and also collected data in diverse mock kitchens and mock bedrooms. In total, we had more than 100 unique rooms represented in the data set that ended up being a part of a bigger pre-training mixture."
+  },
+  {
+    "time": "00:18:36",
+    "speaker": "Chelsea Finn",
+    "en": "So we trained on this diverse mobile manipulation data, including the low-level action prediction as well as predicting high-level subtask commands for how to complete the task. But we also trained on previously collected static manipulation data that was also fairly diverse—static manipulation data that we had collected in our office and in labs, as well as web data and high-level instructional data."
+  },
+  {
+    "time": "00:18:57",
+    "speaker": "Chelsea Finn",
+    "en": "I should point out here that the mobile manipulation data of tidying bedrooms and kitchens only accounted for 2.4% of the overall pre-training mix. And so the lesson here is that you were basically able to spin up a new task and actually an entirely new robot—the rest of the mixture didn't have any mobile manipulation data with this particular mobile manipulator in it—without redoing all of the data collection. We're able to build upon everything that had been done before. And it's kind of this same story of foundation models being able to make it easier to spin up a new problem, a new application, without starting from scratch."
+  },
+  {
+    "time": "00:19:35",
+    "speaker": "Chelsea Finn",
+    "en": "Now this wasn't completely easy. We had a couple challenges. One of the challenges that we ran into is that naively this model can ignore language instructions. So we had actually in this case asked it to pick up the cutting board and it chose to pick up the plate instead. Now we're again asking it to pick up the cutting board, and instead the robot had a mind of its own, decided to pick up the plate. And then we tell it to put the plate in the sink. And eventually it decides that well, after kind of moving away from the cutting board, it eventually decided that it would actually pick up the cutting board. So in the early development of our model, we found that it often ignored language."
+  },
+  {
+    "time": "00:20:11",
+    "speaker": "Chelsea Finn",
+    "en": "To solve this, we thought about how vision language models actually follow language well. Maybe there's a way to preserve the inherent abilities of the pre-trained models when addressing this task. So what we did is with this Pi Zero architecture, this action head that's using diffusion is randomly initialized. And this ends up actually deteriorating the pre-trained knowledge that's present in the vision language model. We found that if we can prevent this deterioration, we might be able to get better language following."
+  },
+  {
+    "time": "00:20:44",
+    "speaker": "Chelsea Finn",
+    "en": "The recipe that we came up with was actually in some ways fairly similar, but instead we're going to be predicting tokenized actions. And then when we have the diffusion head, we'll be stopping the gradient from the randomly initialized diffusion head to prevent it from deteriorating the language following abilities of the VLM backbone. We found that this first led to faster training because the tokenized actions are a more direct supervision signal. And second, it also followed language far better—an 80% follow rate rather than a 20% follow rate—which suggests that we're able to preserve the pre-training in the vision language model backbone."
+  },
+  {
+    "time": "00:21:20",
+    "speaker": "Chelsea Finn",
+    "en": "So, we put those pieces together. We took that recipe and pre-trained it on all of our data, including the mobile manipulation data. We fine-tuned it on mobile manipulation data in a variety of environments. And then we tested the model in places it's never been before."
+  },
+  {
+    "time": "00:21:33",
+    "speaker": "Chelsea Finn",
+    "en": "We rented three Airbnbs that we had never been to before. We put the robot in those homes, in this case in the kitchen, and I asked it to close the cabinet. I asked it to put away the dishes. It has also never seen these dishes or these forks, these objects. And the robot's able to succeed even though it's never been here before. There's different countertops, different furniture, different objects, and so forth. Lastly, I asked it to clean up the spill, and the robot is able to oblige and wipe down the spill and eventually put the sponge into the sink."
+  },
+  {
+    "time": "00:22:16",
+    "speaker": "Chelsea Finn",
+    "en": "It's also able to do this for bedrooms. So Laura asked it in this case just clean the bedroom, and it puts articles of clothing in. It throws away the trash and then is able to tidy the bed by putting the pillow at the top of the bed and tidying the blanket or the comforter of the bed."
+  },
+  {
+    "time": "00:22:41",
+    "speaker": "Ad Voiceover",
+    "en": "YC's next batch is now taking applications. Got a startup in you? Apply at ycombinator.com/apply. It's never too early and filling out the app will level up your idea. Okay, back to the video."
+  },
+  {
+    "time": "00:22:55",
+    "speaker": "Chelsea Finn",
+    "en": "So, quantitatively, I talked about how there's only 2.7% or something of the mixture, and so how much does that other data actually help? Could we actually just train on that kind of 2.7%? And we find that these kind of bars on the right, which are excluding data from static robots in labs and environments and so forth, reduces performance significantly. So the performance goes down to less than 60% when you exclude that data when evaluated in novel homes, compared to if you use the full pre-training mixture, it has more than 20% higher performance."
+  },
+  {
+    "time": "00:23:28",
+    "speaker": "Chelsea Finn",
+    "en": "Lastly we also looked at: is the diversity of data helpful? Is it important? And so we increase the amount of data from these environments to test this. It's always good to like... you can kind of do \"vibe eval,\" but it's really helpful to actually measure how well these things work, and so this is what this is measuring. We find that if we actually increase the amount of homes, the amount of locations that are represented in the data, the performance increases, which is great. It actually gets to the same level of performance as if we train on data from that target environment."
+  },
+  {
+    "time": "00:24:01",
+    "speaker": "Chelsea Finn",
+    "en": "So it means we're actually mostly closing the generalization gap and suggests that the bottlenecks at this point for this sort of task lie not in collecting more diverse data but in actually getting higher reliability and higher performance."
+  },
+  {
+    "time": "00:24:15",
+    "speaker": "Chelsea Finn",
+    "en": "Now I should also mention that there's failure modes like this—the success rate was around 80%. There's lots of room for improvement. Here are a couple examples of those failure modes. So here it's told to put the items in the drawer. It is able to put it in the drawer but the item isn't fully in the drawer at the end and it decides that it's done and kind of moves on to the next thing. Here the robot needs to put the clothes in the laundry basket. It drives over the shirt and then it gets stuck and it's not able to lift it up. Here we asked it to put the dishes in the sink and it successfully is able to put a number of the dishes in the sink but it struggles to pick up the cutting board in this particular case because it's very thin and it's flush against the surface of the countertop."
+  },
+  {
+    "time": "00:24:57",
+    "speaker": "Chelsea Finn",
+    "en": "And in the last case, probably my favorite case, it's told to put the spatula into a drawer and it decides that the oven looks a lot like a drawer, and so it opens the oven and yeah, tries to put it in there. Beyond this, there's also challenges with regard to speed, partial observability, long-term planning, and so lots of work to do still."
+  },
+  {
+    "time": "00:25:21",
+    "speaker": "Chelsea Finn",
+    "en": "So the takeaway here is that with diverse data, robots can follow a variety of instructions in environments that the robot has never been in before. Which is a big step up from a lot of robotic scenarios where they're trained in the scenarios that they are being tested."
+  },
+  {
+    "time": "00:25:36",
+    "speaker": "Chelsea Finn",
+    "en": "Now the last kind of bit I'd like to talk about is: this model has a fairly limited instruction set. It can only follow kind of a certain set of commands. And if we think about how other forms of AI technology have been deployed, people really like to customize and actually tell the robot what they want or tell the system what they want from these kinds of models. And so just like we prompt language models, can we allow robots to respond to open-ended prompts and open-ended interjections?"
+  },
+  {
+    "time": "00:26:02",
+    "speaker": "Chelsea Finn",
+    "en": "So to do this and actually to do the past work, we're actually leveraging hierarchical vision language action models. So we're going to have a high-level policy break down the prompt into intermediate verbal responses and intermediate atomic language commands. So the high-level prompt might be \"Can you make me a sandwich?\", and this high-level policy will break it down into the subtask of \"pick up one slice of bread.\" This will be passed to a low-level model that actually executes and predicts target joint angles to fulfill the low-level command of picking up one slice of bread."
+  },
+  {
+    "time": "00:26:40",
+    "speaker": "Chelsea Finn",
+    "en": "Now, on its own, this isn't going to be able to follow all sorts of prompts, and it's actually fairly tricky to handle open-ended language because it's going to be challenging to collect a large number of human-robot interactions with the real robot in the loop. And this is also going to be fairly hard to scale."
+  },
+  {
+    "time": "00:26:58",
+    "speaker": "Chelsea Finn",
+    "en": "So what we did is we kind of took all of our existing robot data and we can actually generate synthetic data for the existing robot data. In particular, we can use language models to relabel and generate hypothetical human prompts for the scenarios that the robots are in. And so what this looks like is we'll take data that says... here's a kind of a video and then the next skill is to pick up a Kit Kat because that's what the robot does next in terms of just like basic low-level annotation. And then for this scenario where the robot is about to pick up the KitKat, we can ask a vision language model: what is a hypothetical prompt that a human might have asked that led to this particular scenario and the robot to actually choose to pick up a Kit Kat?"
+  },
+  {
+    "time": "00:27:39",
+    "speaker": "Chelsea Finn",
+    "en": "And then we can train our high-level policy on these synthetic prompts to basically augment the robot data with various human interactions that might have led to those different situations. As a result of this, we're able to actually allow robots to follow a variety of different prompts. So on the left, we ask, \"Hi, robot. Can you make me a ham and cheese sandwich?\" The robot says, \"Sure, I'll start with the bread and add ham and cheese next.\" And it's able to break down this task into the various subtasks of picking up a slice of bread, putting on the cutting board, picking up a slice of cheese, putting it on the bread, picking up some ham, and so on and so forth."
+  },
+  {
+    "time": "00:28:14",
+    "speaker": "Chelsea Finn",
+    "en": "I can also follow more complicated prompts like, \"Hi robot, can you make me a vegan sandwich? I don't like pickles, though.\" And in this case is able to break it down and decide that it's going to add lettuce and tomatoes to the sandwich and not add pickles, not add cheese, not add meat as well."
+  },
+  {
+    "time": "00:28:31",
+    "speaker": "Chelsea Finn",
+    "en": "In addition to prompts, we're also able to train the robot to handle different interjections. Here's a case of a different kind of prompt. So on the left we train the robot to clean tables—so put trash away and put dishes into the bin. And on the right we ask the robot, \"Clean up only the trash but not the dishes.\" And the robot's able to understand what that means and connect that to its low-level actions and only put away the trash and complete when the trash is all put away."
+  },
+  {
+    "time": "00:28:59",
+    "speaker": "Chelsea Finn",
+    "en": "And then lastly, it's able to handle interjections and situated corrections. So in this case, the robot is kind of getting items for a user. The user interjects and said, \"Get me something sweet that's not in the basket,\" right after it had put a Kit Kat into the basket. And the robot says, \"Uh, sure. Let me get you some Skittles.\" And reasons through kind of basic reasoning of how to fulfill the user's request and is able to respond to those kinds of corrections situated in the world that the robot is in."
+  },
+  {
+    "time": "00:29:28",
+    "speaker": "Chelsea Finn",
+    "en": "Now you might also wonder like maybe some existing foundation models could serve as a high-level planner for robots and do this sort of high-level reasoning without actually training a separate model. And so we also evaluated that, and we found that in blue the performance at following instructions and making progress on the task was substantially lower than the performance of our system which is shown in green. In general we found that these frontier models generally struggle with visual understanding as it pertains to robotics, which makes sense because in general these models aren't really targeting many physical applications and have very little data in the physical world."
+  },
+  {
+    "time": "00:30:05",
+    "speaker": "Chelsea Finn",
+    "en": "Okay. Um, so to start to wrap up, um, and then we'll all have some time for questions. I talked a bit about how robots can do a variety of dextrous long-horizon tasks with pre-training and post-training. How robots can succeed in places that they've never been, and how they can respond to open-ended prompts and interjections by leveraging synthetic data from language models on top of the robot data that we had collected."
+  },
+  {
+    "time": "00:30:28",
+    "speaker": "Chelsea Finn",
+    "en": "Now with some closing notes, we've seen a few different scenarios in this talk where general-purpose robots might be more successful than specialist robots, but because we can essentially rather than start from scratch for every single application actually build upon a much broader foundation for physical intelligence in the real world. We also saw that large-scale data in the real world is really helpful for developing these things. I think that it's necessary but not sufficient for physical intelligence, and there's a lot of challenges and we need more research to be done, ourselves and through open source contributions, before robots I think will be truly ready to tackle the open world."
+  },
+  {
+    "time": "00:31:08",
+    "speaker": "Chelsea Finn",
+    "en": "I'd also like to mention that at Physical Intelligence we're hiring a number of roles. If you're excited about some of the things that we talked about, you can see a list of the open roles on the pi pi. As well, awesome."
+  },
+  {
+    "time": "00:31:27",
+    "speaker": "Chelsea Finn",
+    "en": "Happy to take some questions. Let's start on the left."
+  },
+  {
+    "time": "00:31:29",
+    "speaker": "Audience Question",
+    "en": "Uh hi Chelsea. So, uh first I want to say thank you for all your work on robot learning. They're all really impressive. Yeah. And uh so mainly I have two questions on uh especially uh regarding the post-training part you mentioned. So um the first thing is uh you mentioned that the in post training the most important part is to have high quality action data. So I'm wondering what the components of that would be and then the second question is what do you think uh RL will play into the part of post training?"
+  },
+  {
+    "time": "00:32:00",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah absolutely. So I think that the different components of it, a lot of it comes down to consistency of the data and the strategy being followed, and whether the data completes the task efficiently and with a reliable strategy. And then on the second question, I think that reinforcement learning can play a very large role in it—actually in post-training. I think that online data from the robots, which reinforcement learning allows you to use, can allow robots to have a much higher success rate and also be faster than if they're just trained with imitation learning."
+  },
+  {
+    "time": "00:32:35",
+    "speaker": "Audience Question",
+    "en": "Yeah, thank you."
+  },
+  {
+    "time": "00:32:37",
+    "speaker": "Audience Question",
+    "en": "Hi, thank you so much for your talk. Uh so your work is really fascinating and there is no doubt that it will have a lot of impact in the future. But um can I ask you at this stage uh how can you find the fundings because honestly I can't imagine how hard it can be to convince people to invest in a robot that folds clothes and deal with the dishes. Yeah."
+  },
+  {
+    "time": "00:33:02",
+    "speaker": "Chelsea Finn",
+    "en": "So um it's a good question. I think that well I guess first I'll mention that we aren't just focused on applications in the home. We really want to solve this broader problem of physical intelligence and we've been starting with those applications because they're ones that are kind of easy to make progress on. Um but we've also been doing tasks like inserting an Ethernet cable which I put in the talk, as well as constructing a cardboard box. And generally I think that this sort of problem has a ton of potential for making impact in all sorts of realms, not just in domestic tasks but all sorts of realms as well."
+  },
+  {
+    "time": "00:33:38",
+    "speaker": "Chelsea Finn",
+    "en": "And even in domestic tasks, I think there's a huge market for this kind of technology. We ourselves haven't had a lot of challenge with fundraising and I think that a lot of robotics companies recently have also done a great job and found that there's actually a lot of excitement around this sort of technology because I think things are actually starting to work. I started working on this technology more than 10 years ago at this point and things really weren't working then. And so yeah, I think that there's a lot of excitement that is starting to mature and actually be ready for the real world. I think that there's a lot more work to do, but generally it seems like there's a lot of people excited about this technology and eager to actually put funds behind it."
+  },
+  {
+    "time": "00:34:16",
+    "speaker": "Audience Question",
+    "en": "Okay, thank you so much."
+  },
+  {
+    "time": "00:34:17",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah."
+  },
+  {
+    "time": "00:34:17",
+    "speaker": "Audience Question",
+    "en": "Hi. Uh thank you so much. Um I have two questions, like one uh uh more broad and one more technical. So the technical one like is uh VLAs uh in my opinion like at least to my understanding are a framework that is a bit separate like from world modeling and I wonder like how the two of them like will interplay among each other and whether like you have actually planned like to somehow like use them together. As I see right now like VLAs as more of a policies that could actually benefit a lot from world modeling. And uh from a B perspective I wonder like which kind of infrastructure layers could be the most useful uh to work on such as like explanability, traceability or uh uh safety in general to deploy such models like in the real world."
+  },
+  {
+    "time": "00:35:11",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah, great question. So um on the first point, there's actually fairly natural ways to incorporate world model objectives into vision language action models. And um we've done some work where um instead of only predicting the next action you predict some intermediate subgoal image—like what should happen in the future in order to accomplish the task—and then predict an action from there. And we've seen some kind of signs of life that that seems to be quite promising. So I think there's ways to merge the two paradigms."
+  },
+  {
+    "time": "00:35:41",
+    "speaker": "Chelsea Finn",
+    "en": "At the same time, I think there's a lot of challenges that come up with world modeling with regard to the ways in which basically the data that you put into it not necessarily being kind of reflective of the ways in which you're going to use it. You might train it on demonstration data of successful data of completing the task and then evaluate it to try to actually use it to evaluate actions that are not optimally completing the task. And then the world model will hallucinate a video of completing the task successfully even if the actions that you provide as input didn't actually lead to a good outcome. So there's challenges there to overcome and so it's not like... yeah there's various challenges but there's also ways to integrate it into the VLA paradigm. And then could you remind me your second question?"
+  },
+  {
+    "time": "00:36:22",
+    "speaker": "Audience Question",
+    "en": "Um what are like the infrastructure layers like you want the chess to work on uh in the shortest term to bring like the most improvements let's say to actually run these models on robots."
+  },
+  {
+    "time": "00:36:37",
+    "speaker": "Chelsea Finn",
+    "en": "You need... we have like a real-time system that needs to actually be hitting a certain frequency to actually like execute actions successfully. And if you have lag in that system and so forth, it introduces all sorts of challenges. And so thinking about fast inference um and infrastructure for like that's actually going to be on the robot is a big part of what our software team does. And then also thinking about like large scale machine learning infrastructure, training large models, ingesting large amounts of data. The data that we have is different from a lot of kind of typical data sets because it's very multimodal in nature. Um it's kind of videos, actions, language segments um and various other components as well. So um yeah, some interesting infrastructure problems I think both on the robot side uh and on the kind of model training side."
+  },
+  {
+    "time": "00:37:23",
+    "speaker": "Audience Question",
+    "en": "Thank you so much."
+  },
+  {
+    "time": "00:37:24",
+    "speaker": "Chelsea Finn",
+    "en": "Yep."
+  },
+  {
+    "time": "00:37:25",
+    "speaker": "Frederick",
+    "en": "Hi, I'm Frederick and I have got a question about model sizes in general. So I think what we're seeing right now is that in general larger model sizes lead to better accuracy. For example, also in your experiments or um it's also what OpenAI and Anthropic and others are doing right now with their LLMs. However, there's also the approach of using a quite small model and then outsourcing the world knowledge into a database of some sort with which the model can interact. Um what is your take on that? Do you think that's like a valid approach or do you think encapsulating all the world knowledge inside of the model is better or works better?"
+  },
+  {
+    "time": "00:38:01",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah, it's an interesting question. So in my experience working on like retrieval-based systems, um is that it actually is a little bit tricky to, well first figure out what should be offloaded versus actually done by the model, and second uh sometimes the model will ignore the retrieved content and try to generate something itself and it actually seems to be quite tricky to get that technically to work exactly the way you want it."
+  },
+  {
+    "time": "00:38:26",
+    "speaker": "Chelsea Finn",
+    "en": "Um, I think it's probably going to depend on the application and the use case in terms of how best to... like whether that might make sense. But in my experience, it ends up being quite tricky to figure out what the division of labor is. And even the like the model part of it will need to have some degree of intelligence in order to um like actually make use of the retrieved information and so forth. Uh, so I think it's a really fascinating research problem. Uh, but it also needs like a lot of research to make that uh to make that work successfully."
+  },
+  {
+    "time": "00:38:56",
+    "speaker": "Frederick",
+    "en": "Thank you."
+  },
+  {
+    "time": "00:38:57",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah."
+  },
+  {
+    "time": "00:38:58",
+    "speaker": "Charu Thomas",
+    "en": "Hi, Chelsea. My name is Charu Thomas. Um, first off, really appreciate the talk. It was really fascinating and have been a big fan of your work since metalearning. Um, when you think about how software and hardware have are going to continue to evolve, what are the biggest opportunities for builders today for your vision of physical intelligence?"
+  },
+  {
+    "time": "00:39:18",
+    "speaker": "Chelsea Finn",
+    "en": "I mean, I think that yeah, there's lots of different like opportunities to make things work a lot better and a lot of like open questions. I think kind of like what I was mentioning before, uh, thinking about better ways of having infrastructure on like kind of the robot side. I think that there isn't a lot of like... there's some open source code for that sort of thing, but there's a lot of um opportunities to make robot infrastructure better. Uh, and not a lot of people I think are working on that aspect of the problem. Also lots of opportunities... like I guess one of the things I love about um about AI and computer science as a whole is there's a really big open source community. And I think that there's a ton of opportunity to actually like do open source work and contribute to like a broader community that's trying to like collect data, open source models, fix bugs on those models, fine-tune those models, figure out new recipes for fine-tuning those models. Um so yeah all sorts of questions also like on the research side especially in the open source realm."
+  },
+  {
+    "time": "00:40:17",
+    "speaker": "Charu Thomas",
+    "en": "Yeah thank you."
+  },
+  {
+    "time": "00:40:17",
+    "speaker": "Audience Question",
+    "en": "Hi, Chelsea. Uh, I also, just like everyone else, am a big fan of all your work. So, thank you for putting that all out. Uh, I've been reading through a lot of your group's work recently and particularly enjoyed reading Siraj... Siraj's PhD thesis. It taught me a lot about scaling real world robotics with data. And a question I have is how do you think synthetic data will sort of scale for robotics in the future? As we've seen with LLMs, we've moved a we've moved away from sort of... not moved away from pre-training, but moved away from human collected data into more creating synthetic data and a lot of filtering and a lot of self-grading. So, how do you think using generative synthetic data for creating environments or reward models will impact robotics?"
+  },
+  {
+    "time": "00:41:02",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah, I have many thoughts on this topic. Uh I think that at the end of the day there's going to be no replacement for real data and so... large amounts of real robot data is going to be a necessary component of any like system that's going to work in a generalizable way. Uh so we're going to need that. Um, at the same time I do think that there's tools for like simulation and synthetic data especially to potentially play on the evaluation side. Because it's very tricky to actually, as you for example are generalizing to many environments, it's very tricky to actually evaluate how well that model generalizes not just in one new environment but in 10 new environments because then you actually need to bring the robot to those 10 environments or construct 10 environments."
+  },
+  {
+    "time": "00:41:40",
+    "speaker": "Chelsea Finn",
+    "en": "Uh whereas in simulation that gets a lot easier. Uh and so I think I'm really excited about kind of simulation and synthetic data for that use case. I should also mention that I think that the analog of synthetic data in language models is actually not necessarily simulation in robotics but closer to something like reinforcement learning. Uh I think that a lot of synthetic data is generated by the model that's actually trying to do the task and then trying to kind of reason through different ways of doing the task. And I think that the analogy there is a robot that's trying to attempt the task and learn from its own attempts and get better from its own attempts. And that sort of online data from the model I think will also play a really critical role in post-training and something that uh we're working on quite a bit. Uh and so yeah that I think is like really important and really helpful."
+  },
+  {
+    "time": "00:42:21",
+    "speaker": "Audience Question",
+    "en": "Thank you."
+  },
+  {
+    "time": "00:42:22",
+    "speaker": "Chelsea Finn",
+    "en": "Cool. I think we have time for one more question. Sorry we won't be able to get to everyone. Yeah."
+  },
+  {
+    "time": "00:42:27",
+    "speaker": "Audience Question",
+    "en": "Hi. It's super cool to see you as an MIT EES alumni now working in a really cool robotics and talking to us about robotics and entrepreneurship. Um, but I've been wondering how robotics research that involves hardware components plays out differently in academia versus industry and are there typically more resources, fewer constraints or broader applications in one setting over the other? And what kind of people or goals do you think might be better suited for each path?"
+  },
+  {
+    "time": "00:42:53",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah, it's an interesting question. Uh, I still love both kind of startup um and academic environments and industry environments. I think they all have various pros and cons. Uh certainly I think that uh any um... I think that generally academic environments aren't quite as well resourced in terms of data collection throughput, eval throughput and compute as um like startups and industry labs. Uh but at the same time I think that there's a lot of uh problems that you can solve without large amounts of resources uh that uh we need to figure out like on the algorithm side."
+  },
+  {
+    "time": "00:43:24",
+    "speaker": "Chelsea Finn",
+    "en": "Uh so I think that there's a lot of really interesting work to be done there. Um and then on the like in industry and in startups, I think the um actually like trying to do some of the research on these big models, scaling up data, seeing what things happen at large scales um is is really great to do there. Yeah, I think that there's yeah, there's a place for both. I also think that the gap isn't as large as often people make it seem. Uh and oftentimes people in industry environments kind of wish they had more compute. Like you kind of always wish that you had more resources. And sometimes when you have a lot of resources, you don't actually think as carefully and as critically about what runs you're going to be doing and so forth and you uh end up being sometimes more wasteful of compute uh than if you were kind of more compute constrained. So there's also actually downsides to having more resources in my experience."
+  },
+  {
+    "time": "00:44:10",
+    "speaker": "Audience Question",
+    "en": "I'm really sorry. Can I just ask a one quick question on architecture? I know that um the scaling laws have worked well for transformer based architectures and I was thinking do you see currently limits um in VLM based architecture which are kind of made for like text tokens because they don't have like modules for physical awareness. Yeah. And how do you deal with that?"
+  },
+  {
+    "time": "00:44:35",
+    "speaker": "Chelsea Finn",
+    "en": "Yeah. So, we tokenized the actions and so I'd encourage you to take a look at the fast tokenizer paper that we put out um as as kind of a way to accomplish that. And yeah, we should uh wrap up there. Uh thanks everyone and um yeah, hope you enjoy the event."
+  }
+]
