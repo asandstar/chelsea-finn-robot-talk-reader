@@ -2,6 +2,8 @@
 
 A zero-build static reading companion for Chelsea Finn's YC AI Startup School talk. It is designed to be published directly with GitHub Pages.
 
+**Live site:** [Open the interactive lecture reader](https://asandstar.github.io/chelsea-finn-robot-talk-reader/)
+
 ## What is included
 
 - 98 timestamped English transcript segments
