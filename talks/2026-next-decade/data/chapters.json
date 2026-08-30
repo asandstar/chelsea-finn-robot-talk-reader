@@ -1,0 +1,156 @@
+[
+  {
+    "id":"state-of-pi","start":0,"end":0,"time":"00:00–01:22",
+    "title":"From capability demos to a deployment benchmark","zhTitle":"从能力 demo 转向部署基准",
+    "summary":"The opening changes the unit of progress: isolated task coverage is no longer enough; a useful generalist must combine breadth with unattended real-world operation.",
+    "concepts":["capability vs reliability","general-purpose robot","deployment benchmark","physical intelligence"],
+    "why":"2025 的主线是 foundation VLA 能做到什么；2026 的主线是这些能力能否在真实工作流里持续产生价值。这个变化会重新定义数据收集、训练目标和评价指标。",
+    "takeaway":"机器人研究从 task repertoire 进入 reliability × autonomy × generality 的三维评价。",
+    "papers":[{"label":"π0.7 overview","url":"https://www.pi.website/blog/pi07","note":"single-model breadth and out-of-box performance"}],
+    "tags":["Research Agenda","Deployment","Generalist"]
+  },
+  {
+    "id":"useful-real-world","start":1,"end":1,"time":"01:23–05:10",
+    "title":"Physical AI has a harsher error budget","zhTitle":"物理 AI 的错误预算更苛刻",
+    "summary":"Recommendation systems leave the final action to a user; autonomous robots directly alter the world. That moves reliability from a product refinement to a precondition for usefulness.",
+    "concepts":["human-in-the-loop","autonomy","error budget","real-world decision making","trust"],
+    "why":"在数字系统里，错误 token 的成本常常很低；在机器人里，失败会打断流程、损坏物体或触发安全风险。成功率必须和任务长度、恢复能力、干预频率一起看。",
+    "takeaway":"越少依赖人类做最终决定，系统就越需要把罕见错误与恢复纳入设计中心。",
+    "papers":[{"label":"Physical Intelligence layer","url":"https://www.pi.website/blog/partner","note":"partner deployments and production-oriented metrics"}],
+    "tags":["Reliability","Autonomy","Deployment"]
+  },
+  {
+    "id":"reliability-problem","start":2,"end":2,"time":"05:11–07:42",
+    "title":"Reliability is a data-loop problem","zhTitle":"可靠性本质上是数据闭环问题",
+    "summary":"Espresso combines precision, force, liquids, timing, and cleanup. Manual dataset iteration improves the mean case but struggles to exhaust the long tail of model-specific failures.",
+    "concepts":["long-tail failures","edge-case mining","success rate","workflow reliability","espresso manipulation"],
+    "why":"可靠性不是简单“再收一些数据”。高价值数据来自当前 policy 最容易失败的状态；因此训练流程必须能主动发现、标记和修正自己的 failure distribution。",
+    "takeaway":"从 90% 走向更高可靠性，需要自动寻找失败分布，而不是无限延长人工数据 curation。",
+    "papers":[{"label":"π*0.6 / RECAP","url":"https://www.pi.website/blog/pistar06","note":"real-world tasks, throughput, and failure-rate improvements"}],
+    "tags":["Reliability","Data Loop","Long Tail"]
+  },
+  {
+    "id":"rl-for-robotics","start":3,"end":3,"time":"07:43–09:34",
+    "title":"Why robot RL cannot copy language-model RL","zhTitle":"机器人 RL 为什么不能照搬语言模型 RL",
+    "summary":"Physical rollouts consume time, hardware, setup, and recovery labor. The million-rollout logic behind some language RL recipes becomes hundreds of robot-days even for short tasks.",
+    "concepts":["sample efficiency","physical rollout cost","PPO","GRPO","hardware utilization"],
+    "why":"机器人 RL 的关键约束不是 GPU token budget，而是 wall-clock、硬件并行度、复位成本与安全。算法价值要按每小时有效经验和下游吞吐量衡量。",
+    "takeaway":"可扩展 robot RL 的第一目标是减少每个能力所需的真实尝试，而不是最大化 rollout 数。",
+    "papers":[{"label":"RECAP paper","url":"https://www.pi.website/download/pistar06.pdf","note":"advantage-conditioned RL for VLAs"}],
+    "tags":["RL","Sample Efficiency","Hardware"]
+  },
+  {
+    "id":"learning-from-failures","start":4,"end":4,"time":"09:35–12:42",
+    "title":"Interventions and a reusable value model","zhTitle":"人类纠正与可复用价值模型",
+    "summary":"Interventions turn dead ends into recovery examples. A value model trained across robot video estimates progress toward success and shares that knowledge across tasks instead of demanding many repeats per prompt.",
+    "concepts":["expert intervention","recovery data","value function","time-to-success","cross-task amortization"],
+    "why":"失败数据并非天然有用：长时间困在无效状态只会浪费硬件。干预负责把轨迹拉回有学习价值的区域，value model 则把稀疏终局信号变成更密集的相对进展。",
+    "takeaway":"高效失败学习 = 及时纠正不可恢复状态 + 跨任务共享“是否在前进”的判断。",
+    "papers":[{"label":"π*0.6 / RECAP","url":"https://www.pi.website/blog/pistar06","note":"corrections, autonomous episodes, rewards, and advantage"}],
+    "tags":["RL","Intervention","Value Function","Recovery"],
+    "crossLinks":[{"kicker":"Origin · 2025","title":"Where does RL fit after curated post-training?","href":"../2025-building-robots/#chapter-qa-posttraining-rl","note":"2025 还把 online RL 作为下一阶段判断；2026 给出可运行的 experience-and-corrections recipe。"}]
+  },
+  {
+    "id":"self-improvement-loop","start":5,"end":5,"time":"12:43–14:20",
+    "title":"A robot that creates its next training set","zhTitle":"机器人开始生成自己的下一轮训练集",
+    "summary":"Pretraining, demonstrations, autonomous execution, interventions, rewards, and advantage conditioning form a repeatable improvement loop rather than a one-off fine-tuning run.",
+    "concepts":["self-improvement","on-policy data","offline RL","advantage conditioning","deployment loop"],
+    "why":"这里的“自我改进”不是无监督递归自改代码，而是部署系统不断暴露当前 policy 的状态分布，再由纠正与 reward 将经验转成训练信号。人类仍负责关键监督与安全边界。",
+    "takeaway":"部署不再只是推理终点，而是持续产生更贴近 test distribution 的训练阶段。",
+    "papers":[{"label":"RECAP paper","url":"https://www.pi.website/download/pistar06.pdf","note":"RL with Experience and Corrections via Advantage-conditioned Policies"}],
+    "tags":["Self-improvement","Deployment","RECAP","Online Learning"]
+  },
+  {
+    "id":"thirteen-hour-autonomy","start":6,"end":6,"time":"14:21–17:35",
+    "title":"Thirteen hours changes what counts as evidence","zhTitle":"13 小时自治改变了证据标准",
+    "summary":"The espresso system is evaluated as a long-running service, while laundry and box assembly connect the same recipe to variable objects and a factory workflow. Throughput combines speed and success into a deployment-facing metric.",
+    "concepts":["long-term autonomy","throughput","intervention rate","continuous evaluation","production workflow"],
+    "why":"单次 success 容易隐藏重置、人工干预和速度问题。连续运行会暴露误差累积、边缘状态与基础设施故障，也更接近用户真正购买的“每小时成功产出”。",
+    "takeaway":"真实可靠性要用长时间、未剪辑、包含速度和失败的运行统计来证明。",
+    "papers":[{"label":"π*0.6 / RECAP","url":"https://www.pi.website/blog/pistar06","note":"hours-long real-world runs and quantitative results"}],
+    "tags":["Autonomy","Evaluation","Throughput","RECAP"]
+  },
+  {
+    "id":"multi-timescale-memory","start":7,"end":7,"time":"17:36–21:21",
+    "title":"Memory at two media and timescales","zhTitle":"两种介质、两个时间尺度的记忆",
+    "summary":"Recent visual dynamics are compressed by an efficient video encoder; longer task history is represented as textual notes. The split preserves motion detail without paying the token cost of replaying hours of video.",
+    "concepts":["short-term video memory","long-term textual memory","causal temporal attention","task-progress notes","token compression"],
+    "why":"短期记忆回答“刚才物体怎么动”，长期记忆回答“哪些子任务已经完成”。把不同问题塞进同一种存储会浪费 context，也会让实时控制受延迟影响。",
+    "takeaway":"机器人 memory 的设计变量不是只有长度，还包括表示介质、更新频率、压缩损失和进入 policy 的接口。",
+    "papers":[{"label":"PI Memory","url":"https://www.pi.website/research/memory","note":"efficient long- and short-term memory for VLAs"}],
+    "tags":["Memory","Long Horizon","Video Encoder","Hierarchy"],
+    "crossLinks":[{"kicker":"Origin · 2025","title":"Memory was one hypothesis among many","href":"../2025-building-robots/#chapter-memory-hypotheses","note":"2025 强调先诊断 missing history；2026 把它实现成面向 latency 与 token budget 的多时间尺度模块。"}]
+  },
+  {
+    "id":"general-purpose-model","start":8,"end":8,"time":"21:22–25:01",
+    "title":"The BERT-to-GPT analogy for robotics","zhTitle":"机器人领域的 BERT → GPT 类比",
+    "summary":"Chelsea distinguishes a pretrained model that still needs per-task fine-tuning from a model that works directly from prompts. Compositional generalization adds evidence that the model represents reusable concepts rather than memorized task bundles.",
+    "concepts":["pretraining","fine-tuning","out-of-box inference","compositional generalization","foundation model"],
+    "why":"“通用”不能只指同一个 checkpoint 可被多次 fine-tune。更强的标准是：一个统一策略直接工作，并能把已学对象、动作、语言与 embodiment 以未见组合重新使用。",
+    "takeaway":"generalist 的门槛从“可适配”提高到“可直接使用且可组合”。",
+    "papers":[{"label":"π0.7 paper","url":"https://arxiv.org/abs/2604.15483","note":"steerability, out-of-box tasks, and compositional tests"}],
+    "tags":["Foundation Model","Out-of-box","Compositionality"]
+  },
+  {
+    "id":"out-of-box-model","start":9,"end":9,"time":"25:02–27:34",
+    "title":"Replacing the specialist without losing mastery","zhTitle":"不牺牲专门能力地替代 specialist",
+    "summary":"The target is not a broad but mediocre model. π0.7 must retain the speed and robustness that π*0.6 obtained through task-specific RL while serving many tasks from one checkpoint.",
+    "concepts":["specialist vs generalist","fine-tuning","distillation","task mastery","deployment cost"],
+    "why":"一个 generalist 若每到现场仍需昂贵 fine-tuning，就没有完全改变机器人应用开发成本。反过来，若只展示 breadth 而不比较 specialist 的吞吐量，也无法证明通用化没有稀释能力。",
+    "takeaway":"真正的 out-of-box 评价必须用最强 specialist 作基线，而不是只和旧通用模型比较。",
+    "papers":[{"label":"π0.7 overview","url":"https://www.pi.website/blog/pi07","note":"generalist vs RECAP-trained specialist comparison"}],
+    "tags":["π0.7","Generalist","Specialist","Evaluation"]
+  },
+  {
+    "id":"all-data-context","start":10,"end":10,"time":"27:35–30:19",
+    "title":"Use all the data—by telling the model what it means","zhTitle":"利用所有数据，但要告诉模型每条数据意味着什么",
+    "summary":"π0.7 mixes high- and low-quality demonstrations, autonomous failures, human video, and web data. Rich context—strategy, quality, duration, subtasks, memory, and visual subgoals—prevents the policy from treating every trajectory as equally desirable.",
+    "concepts":["heterogeneous data","metadata conditioning","visual subgoal","world model","steerability","data quality"],
+    "why":"naive mixture 会把不同策略、质量和控制方式平均在一起。conditioning 把数据歧义显式化，使失败经验可以贡献动力学与恢复信息，却不必被模型当成理想行为照抄。",
+    "takeaway":"数据多样性只有在 context 能解释行为差异时，才会转化为可控的策略能力。",
+    "papers":[{"label":"π0.7 overview","url":"https://www.pi.website/blog/pi07","note":"diverse conditioning and synthetic visual subgoals"},{"label":"π0.7 paper","url":"https://arxiv.org/abs/2604.15483","note":"training mixture and ablations"}],
+    "tags":["π0.7","World Model","Data","Conditioning"],
+    "crossLinks":[{"kicker":"Origin · 2025","title":"Can a future image guide the VLA?","href":"../2025-building-robots/#chapter-qa-world-model","note":"2025 关注成功数据训练的 world model 会在失败状态 hallucinate；2026 将轻量 world model 接入 visual-subgoal conditioning。"}]
+  },
+  {
+    "id":"generalist-beats-specialists","start":11,"end":11,"time":"30:20–31:20",
+    "title":"One model against RL-trained specialists","zhTitle":"一个模型对比多个 RL specialist",
+    "summary":"π0.7 absorbs autonomous and specialist experience into a unified training mixture, then matches or exceeds specialist throughput and success on espresso, laundry, and box building.",
+    "concepts":["experience distillation","multi-task training","normalized throughput","success rate","capability consolidation"],
+    "why":"这是“generalist beats specialist”主张的核心证据：比较对象是通过真实机器人 RL 优化过的强基线，指标同时包含速度与成功。它也暗示不同任务经验可能在统一模型中产生正迁移。",
+    "takeaway":"部署经验既可提升一个任务，也可作为预训练材料被整合回下一代 generalist。",
+    "papers":[{"label":"π0.7 overview","url":"https://www.pi.website/blog/pi07","note":"quantitative comparison with π*0.6 specialists"},{"label":"π*0.6 / RECAP","url":"https://www.pi.website/blog/pistar06","note":"specialist baseline and experience data source"}],
+    "tags":["π0.7","RECAP","Distillation","Evaluation"]
+  },
+  {
+    "id":"compositional-generalization","start":12,"end":12,"time":"31:21–37:48",
+    "title":"Composing language, objects, tasks, and bodies","zhTitle":"组合语言、物体、任务与机器人身体",
+    "summary":"π0.7 is tested on rare object–skill pairings and on task–embodiment pairings absent from robot-specific training. Diversity and metadata ablations probe whether the result comes from the proposed recipe.",
+    "concepts":["compositional generalization","cross-embodiment transfer","zero-shot task transfer","equivariance","data ablation"],
+    "why":"组合泛化减少了训练集必须穷举的组合数量。不过“未见”需要严格审计：air fryer 后来被发现有三条 episode，说明应报告完全 held-out、极低频与重组概念之间的差别。",
+    "takeaway":"比 environment shift 更强的测试，是有意 hold out task × object 或 task × embodiment 的交叉组合。",
+    "papers":[{"label":"π0.7 paper","url":"https://arxiv.org/abs/2604.15483","note":"compositional task and cross-embodiment evaluations"}],
+    "tags":["π0.7","Generalization","Cross-Embodiment","Ablation"],
+    "crossLinks":[{"kicker":"Origin · 2025","title":"π0.5 in entirely new homes","href":"../2025-building-robots/#chapter-unseen-homes-eval","note":"2025 主要测 environment shift；2026 把测试推进到任务、物体与 embodiment 的 held-out 组合。"}]
+  },
+  {
+    "id":"gpt-era","start":13,"end":13,"time":"37:49–39:48",
+    "title":"A GPT era without software-speed distribution","zhTitle":"进入 GPT 能力阶段，但不会以软件速度分发",
+    "summary":"The capability analogy is a unified model that works across applications. The product analogy breaks because adoption requires hardware, integration, safety, service, and site-specific operations.",
+    "concepts":["GPT era","physical distribution","robot deployment","cross-embodiment","production adaptation"],
+    "why":"foundation model 可以压缩算法开发成本，却不会消除硬件供应、现场流程、故障维护与安全验证。判断“机器人 GPT 时刻”时，应把 capability breakthrough 与 adoption curve 分开。",
+    "takeaway":"模型可能已经跨过通用能力门槛，但物理世界决定了商业扩散仍是一条慢曲线。",
+    "papers":[{"label":"Physical Intelligence layer","url":"https://www.pi.website/blog/partner","note":"real deployment partners and embodiment coverage"}],
+    "tags":["Deployment","Foundation Model","Industry"]
+  },
+  {
+    "id":"qa-next-decade","start":14,"end":14,"time":"39:49–end",
+    "title":"Q&A: data, open source, speed, and the remaining frontier","zhTitle":"问答：数据、开源、速度与剩余前沿",
+    "summary":"Chelsea separates capability from distribution, argues that robot experience remains essential, and identifies hardware/data costs, runtime speed, infrastructure, and long-horizon reliability as constraints on broad adoption.",
+    "concepts":["robot experience","open source","human video transfer","policy speed","teleoperation ceiling","research careers"],
+    "why":"web 与人类视频提供语义和视觉先验，但动作能力仍需要真实 embodiment 经验；开源权重也不自动带来数据、机器人和评测设施。这些系统约束决定小团队应优先从强模型 fine-tune，而不是复制 frontier pretraining。",
+    "takeaway":"未来数据集将越来越多来自部署中的机器人尝试，但这些经验仍需奖励、纠正和基础设施才能变成学习。",
+    "papers":[{"label":"Human-to-robot transfer","url":"https://www.pi.website/research/human_to_robot","note":"how human video helps after sufficient robot-scale pretraining"},{"label":"OpenPI","url":"https://www.pi.website/blog/openpi","note":"open models, code, and practical adaptation limits"}],
+    "tags":["Q&A","Data","Open Source","Deployment"]
+  }
+]

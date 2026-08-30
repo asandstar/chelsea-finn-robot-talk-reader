@@ -1,0 +1,38 @@
+{
+  "slug": "2025-building-robots",
+  "year": "2025",
+  "pageTitle": "Chelsea Finn · Building Robots That Can Do Anything · Research Reader",
+  "description": "A bilingual, timestamped research reader for Chelsea Finn's 2025 talk on general-purpose robots, π0, π0.5, Hi Robot, memory, RL, and world models.",
+  "eyebrow": "2025 research reading companion · VLA / Robot Learning",
+  "titleLead": "Chelsea Finn:",
+  "titleFocus": "Building Robots That Can Do Anything",
+  "subtitle": "英文逐字稿、中文逐段翻译、时间戳联动，以及围绕 π0、π0.5、Hi Robot、FAST、memory、world model 与 post-training 的研究注释。",
+  "speaker": "Chelsea Finn",
+  "date": "June 17, 2025",
+  "duration": "44:52",
+  "videoId": "a8-QsBHoH94",
+  "videoUrl": "https://www.youtube.com/watch?v=a8-QsBHoH94",
+  "venue": "Y Combinator AI Startup School, San Francisco",
+  "contentKind": "Full bilingual transcript",
+  "sourceLabel": "Original YouTube talk",
+  "sourceUrl": "https://www.youtube.com/watch?v=a8-QsBHoH94",
+  "sourceNote": "The English transcript was supplied by the reader from a third-party transcript copy. Chinese translation and research annotations are study notes. Original talk and video rights remain with their respective owners.",
+  "startLabel": "Start the 2025 reader",
+  "randomLabel": "Jump to a key idea",
+  "route": ["Generalist model", "Data scale", "π0 capability", "π0.5 generalization", "Hi Robot interaction", "RL / world models / FAST"],
+  "keyInsights": ["memory-hypotheses", "posttraining-breakthrough", "pi0-architecture", "knowledge-insulation", "hi-robot", "qa-world-model", "qa-synthetic", "qa-academia-fast"],
+  "paperSources": [
+    {"year":"2024","label":"π0","url":"https://www.pi.website/blog/pi0","note":"Generalist VLA, cross-embodiment pretraining, flow-matching action expert, and dexterous long-horizon tasks."},
+    {"year":"2025","label":"FAST","url":"https://www.pi.website/research/fast","note":"Efficient tokenization for high-frequency autoregressive robot action sequences."},
+    {"year":"2025","label":"Hi Robot","url":"https://www.pi.website/research/hirobot","note":"Hierarchical VLA for open-ended instructions, interjections, and situated corrections."},
+    {"year":"2025","label":"π0.5","url":"https://www.pi.website/blog/pi05","note":"Open-world generalization through heterogeneous co-training and hybrid action representations."}
+  ],
+  "footer": {
+    "title": "Study companion",
+    "note": "This page combines a supplied English transcript with original Chinese translation and research annotations. Claims attributed to the talk are separated from supplemental interpretation wherever possible.",
+    "links": [
+      {"label":"Original video ↗","url":"https://www.youtube.com/watch?v=a8-QsBHoH94"},
+      {"label":"Physical Intelligence ↗","url":"https://www.pi.website/research"}
+    ]
+  }
+}

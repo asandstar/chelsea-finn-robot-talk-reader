@@ -1,0 +1,39 @@
+{
+  "slug": "2026-next-decade",
+  "year": "2026",
+  "pageTitle": "Chelsea Finn · The Next Decade in Robotics · Research Reader",
+  "description": "Timestamped bilingual research notes for Chelsea Finn's 2026 talk on robot reliability, deployment RL, memory, π0.7, world models, and compositional generalization.",
+  "eyebrow": "2026 research reading companion · Reliability / Memory / π0.7",
+  "titleLead": "Chelsea Finn:",
+  "titleFocus": "The Next Decade in Robotics",
+  "subtitle": "按 Root Access 官方章节时间戳组织的双语研究摘要：从可靠性与部署经验强化学习，到 13 小时自治、多时间尺度记忆、π0.7、视觉子目标与组合泛化。",
+  "speaker": "Chelsea Finn",
+  "date": "August 12, 2026",
+  "duration": "58 min",
+  "videoId": "cRZNwgvcWUg",
+  "videoUrl": "https://www.youtube.com/watch?v=cRZNwgvcWUg",
+  "venue": "Y Combinator Startup School 2026",
+  "contentKind": "Curated bilingual research notes",
+  "sourceLabel": "Official Root Access article + transcript",
+  "sourceUrl": "https://www.ycrootaccess.com/p/chelsea-finn-on-the-next-decade-in",
+  "sourceNote": "This page does not republish the full transcript. It provides original English and Chinese research summaries aligned to Root Access's official timestamp boundaries, with short attributed talk claims and supplemental PI research links.",
+  "startLabel": "Start the 2026 reader",
+  "randomLabel": "Jump to a key result",
+  "route": ["Reliability", "Efficient robot RL", "Deployment experience", "Long-term autonomy", "Multi-timescale memory", "π0.7", "Compositional generalization"],
+  "keyInsights": ["reliability-problem", "learning-from-failures", "self-improvement-loop", "thirteen-hour-autonomy", "multi-timescale-memory", "all-data-context", "generalist-beats-specialists", "compositional-generalization"],
+  "paperSources": [
+    {"year":"2025","label":"π*0.6 / RECAP","url":"https://www.pi.website/blog/pistar06","note":"Deployment RL with demonstrations, corrections, autonomous experience, rewards, and advantage conditioning."},
+    {"year":"2026","label":"Memory","url":"https://www.pi.website/research/memory","note":"Efficient short-term video memory and long-term textual task-progress memory."},
+    {"year":"2026","label":"π0.7","url":"https://www.pi.website/blog/pi07","note":"Steerable generalist VLA with diverse context, visual subgoals, and compositional generalization."},
+    {"year":"2026","label":"π0.7 paper","url":"https://arxiv.org/abs/2604.15483","note":"Architecture, training mixture, ablations, out-of-box performance, and cross-embodiment evaluation."}
+  ],
+  "footer": {
+    "title": "Research notes, not a transcript mirror",
+    "note": "Timestamps and talk framing follow the official Root Access page. The English and Chinese prose here is editorial synthesis; PI paper details are supplemental research context and should not be read as verbatim claims from the stage.",
+    "links": [
+      {"label":"Root Access transcript ↗","url":"https://www.ycrootaccess.com/p/chelsea-finn-on-the-next-decade-in"},
+      {"label":"Original video ↗","url":"https://www.youtube.com/watch?v=cRZNwgvcWUg"},
+      {"label":"PI research ↗","url":"https://www.pi.website/research"}
+    ]
+  }
+}

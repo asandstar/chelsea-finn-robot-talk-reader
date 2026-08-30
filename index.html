@@ -3,110 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Chelsea Finn: Building Robots That Can Do Anything. Bilingual transcript and annotated VLA / robot learning reading companion." />
+  <meta name="description" content="Chelsea Finn and Physical Intelligence talks, read as a connected bilingual research notebook." />
   <meta name="theme-color" content="#f5f4ef" />
-  <title>Chelsea Finn · Building Robots That Can Do Anything · Research Reader</title>
+  <title>Chelsea Finn · Physical Intelligence Research Reader</title>
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body>
-  <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
-
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="Back to top">
-      <span class="brand-mark">π</span>
-      <span>Robot Talk Reader</span>
-    </a>
-    <nav class="top-actions" aria-label="Reading controls">
-      <button id="focusToggle" class="ghost-btn" type="button" title="Toggle focus mode">Focus</button>
-      <button id="themeToggle" class="ghost-btn" type="button" title="Toggle dark mode">Dark</button>
-      <a class="ghost-btn link-btn" href="https://www.youtube.com/watch?v=a8-QsBHoH94" target="_blank" rel="noreferrer">YouTube ↗</a>
-    </nav>
-  </header>
-
-  <section id="top" class="hero shell">
-    <div class="hero-kicker">Research reading companion · VLA / Robot Learning</div>
-    <h1>Chelsea Finn:<br /><span>Building Robots That Can Do Anything</span></h1>
-    <p class="hero-deck">英文逐字稿、中文逐段翻译、时间戳联动，以及围绕 π0、π0.5、Hi Robot、FAST、memory、world model 与 post-training 的研究注释。</p>
-    <div class="hero-meta">
-      <span>44:52</span><span>98 transcript segments</span><span>17 research chapters</span><span>June 17, 2025</span>
-    </div>
-    <div class="hero-actions">
-      <a class="primary-btn" href="#reader">Start reading</a>
-      <button id="randomInsight" class="secondary-btn" type="button">Jump to a key idea</button>
-    </div>
-    <div class="route-strip" aria-label="Talk research route">
-      <span>Generalist model</span><i>→</i><span>Data scale</span><i>→</i><span>π0 capability</span><i>→</i><span>π0.5 generalization</span><i>→</i><span>Hi Robot interaction</span><i>→</i><span>RL / world models / FAST</span>
-    </div>
-  </section>
-
-  <section class="video-band shell" aria-label="Video companion">
-    <div class="video-card">
-      <div class="video-copy">
-        <div class="eyebrow">Video companion</div>
-        <h2>点击任意时间戳，视频会跳到对应位置</h2>
-        <p>页面会记录当前阅读段落。时间戳既可以更新嵌入视频，也可以直接打开 YouTube 对应秒数。</p>
-        <div id="nowPlaying" class="now-playing">00:00:00 · General-purpose robots</div>
-      </div>
-      <div class="video-frame-wrap">
-        <iframe id="videoFrame" class="video-frame" src="https://www.youtube-nocookie.com/embed/a8-QsBHoH94?rel=0" title="Chelsea Finn: Building Robots That Can Do Anything" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
-
-  <main id="reader" class="reader-shell shell">
-    <aside id="chapterNav" class="chapter-nav" aria-label="Chapter navigation"></aside>
-
-    <section class="reader-main">
-      <div class="control-panel">
-        <div class="view-switch" role="group" aria-label="Language view">
-          <button class="view-btn active" data-view="bilingual" type="button">EN + 中文</button>
-          <button class="view-btn" data-view="en" type="button">English</button>
-          <button class="view-btn" data-view="zh" type="button">中文</button>
-        </div>
-        <label class="search-box">
-          <span aria-hidden="true">⌕</span>
-          <input id="searchInput" type="search" placeholder="Search transcript / 搜索逐字稿" autocomplete="off" />
-          <kbd>/</kbd>
-        </label>
-        <button id="clearFilter" class="tiny-btn" type="button" hidden>Clear</button>
-      </div>
-      <div id="tagBar" class="tag-bar" aria-label="Topic filters"></div>
-      <div id="searchStatus" class="search-status" aria-live="polite"></div>
-      <div id="transcriptRoot"></div>
-    </section>
-
-    <aside class="research-rail" aria-label="Active research notes">
-      <div id="researchCard" class="research-card"></div>
-    </aside>
-  </main>
-
-  <section class="paper-map shell">
-    <div class="section-heading">
-      <div class="eyebrow">Paper map</div>
-      <h2>把演讲放回 PI 的论文路线里</h2>
-      <p>这场演讲可以当作一条从 capability 到 generalization，再到 interaction 与 post-training 的阅读主线。</p>
-    </div>
-    <div class="paper-grid">
-      <a class="paper-card" href="https://www.physicalintelligence.company/download/pi0.pdf" target="_blank" rel="noreferrer"><span>2024</span><strong>π0</strong><p>Generalist VLA, cross-embodiment pretraining, flow-matching action expert, dexterous long-horizon tasks.</p></a>
-      <a class="paper-card" href="https://www.physicalintelligence.company/download/fast.pdf" target="_blank" rel="noreferrer"><span>2025</span><strong>FAST</strong><p>Efficient action tokenization for high-frequency autoregressive VLA training.</p></a>
-      <a class="paper-card" href="https://www.physicalintelligence.company/download/hirobot.pdf" target="_blank" rel="noreferrer"><span>2025</span><strong>Hi Robot</strong><p>Hierarchical VLA for open-ended instructions, interjections, and situated corrections.</p></a>
-      <a class="paper-card" href="https://www.physicalintelligence.company/download/pi05.pdf" target="_blank" rel="noreferrer"><span>2025</span><strong>π0.5</strong><p>Open-world generalization through heterogeneous co-training and hybrid action representations.</p></a>
-    </div>
-  </section>
-
-  <footer class="footer shell">
-    <div>
-      <strong>Study companion</strong>
-      <p>English transcript supplied by the reader from a third-party transcript copy. Chinese translation and research annotations are study notes. Original talk and video rights remain with their respective owners. For a public GitHub Pages deployment, review the source platform's redistribution terms and keep attribution to the original video.</p>
-    </div>
-    <div class="footer-links">
-      <a href="https://www.youtube.com/watch?v=a8-QsBHoH94" target="_blank" rel="noreferrer">Original video ↗</a>
-      <a href="https://www.physicalintelligence.company/blog/pi0" target="_blank" rel="noreferrer">Physical Intelligence ↗</a>
-      <a href="#top">Back to top ↑</a>
-    </div>
-  </footer>
-
-  <script src="data/talk-data.js"></script>
-  <script src="assets/app.js"></script>
+<body class="home-page">
+  <div id="homeApp"></div>
+  <script src="data/site-data.js"></script>
+  <script src="assets/home.js"></script>
 </body>
 </html>

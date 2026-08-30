@@ -49,7 +49,8 @@
     "why":"对研究方法很重要：看到长程任务失败时，不能自动把原因归结为 memory。这里 memory 只是多个可检验 hypothesis 之一。真正的 breakthrough 随后来自训练数据组织方式。这提示做 robot memory 研究时要先证明失败确实来自 missing history。",
     "quote":"maybe the robot needs memory, needs history in some way",
     "papers":[{"label":"π0 paper","url":"https://www.physicalintelligence.company/download/pi0.pdf","note":"the eventual system improved primarily through pretraining + post-training"}],
-    "tags":["Memory","Hierarchy","Research Method"]
+    "tags":["Memory","Hierarchy","Research Method"],
+    "crossLinks":[{"kicker":"Then → Now · 2026","title":"Multi-timescale memory becomes a system","href":"../2026-next-decade/#chapter-multi-timescale-memory","note":"短期视频保留运动细节，长期文本记录任务进度；memory 从候选失败假设变成明确架构。"}]
   },
   {
     "id":"posttraining-breakthrough",
@@ -127,7 +128,8 @@
     "why":"这段很适合学习 benchmark 思维：泛化不能只靠几个 demo 宣称，需要 unseen environments、数据消融、环境数量 scaling 和 failure taxonomy。Chelsea 也明确指出 partial observability 与 long-term planning 仍未解决。",
     "quote":"it's really helpful to actually measure how well these things work",
     "papers":[{"label":"π0.5 paper","url":"https://www.physicalintelligence.company/download/pi05.pdf","note":"novel-home evaluation and generalization analysis"}],
-    "tags":["π0.5","Evaluation","Generalization","Partial Observability"]
+    "tags":["π0.5","Evaluation","Generalization","Partial Observability"],
+    "crossLinks":[{"kicker":"Then → Now · 2026","title":"From unseen homes to compositional generalization","href":"../2026-next-decade/#chapter-compositional-generalization","note":"评价从环境分布偏移扩展到 task × object 与 task × embodiment 的未见组合。"}]
   },
   {
     "id":"hi-robot",
@@ -166,7 +168,8 @@
     "why":"这段把未来 VLA post-training 的路线说得很清楚：BC 提供起点，online interaction 让机器人接触自己的 state distribution，再通过 RL 或相关自改进方法提升 reliability。",
     "quote":"reinforcement learning can play a very large role ... in post-training",
     "papers":[{"label":"π0 paper","url":"https://www.physicalintelligence.company/download/pi0.pdf","note":"imitation/pretraining baseline context"}],
-    "tags":["RL","Post-training","Online Learning"]
+    "tags":["RL","Post-training","Online Learning"],
+    "crossLinks":[{"kicker":"Then → Now · 2026","title":"RECAP learns from deployment experience","href":"../2026-next-decade/#chapter-learning-from-failures","note":"2025 的 online-RL 判断，在 2026 变成 interventions、跨任务 value model 与 autonomous experience 的闭环。"}]
   },
   {
     "id":"qa-world-model",
@@ -179,7 +182,8 @@
     "why":"这里给出了一个很重要的区分：world model 只有在能正确预测 policy 实际会访问的失败/偏离状态时才真正有决策价值。只在成功 demonstration 上学到的 predictive model，拿来评估错误动作时可能非常不可靠。",
     "quote":"the world model will hallucinate a video of completing the task successfully",
     "papers":[],
-    "tags":["World Model","VLA","Infrastructure"]
+    "tags":["World Model","VLA","Infrastructure"],
+    "crossLinks":[{"kicker":"Then → Now · 2026","title":"World models generate visual subgoals for π0.7","href":"../2026-next-decade/#chapter-all-data-context","note":"未来图像从 Q&A 里的风险与可能性，发展为 steerable VLA 的 subgoal-image conditioning。"}]
   },
   {
     "id":"qa-retrieval-open-source",

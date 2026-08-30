@@ -1,32 +1,83 @@
 window.TALK_DATA = {
   "meta": {
-    "title": "Chelsea Finn: Building Robots That Can Do Anything",
-    "subtitle": "Bilingual transcript + VLA / robot learning research annotations",
+    "slug": "2025-building-robots",
+    "year": "2025",
+    "pageTitle": "Chelsea Finn · Building Robots That Can Do Anything · Research Reader",
+    "description": "A bilingual, timestamped research reader for Chelsea Finn's 2025 talk on general-purpose robots, π0, π0.5, Hi Robot, memory, RL, and world models.",
+    "eyebrow": "2025 research reading companion · VLA / Robot Learning",
+    "titleLead": "Chelsea Finn:",
+    "titleFocus": "Building Robots That Can Do Anything",
+    "subtitle": "英文逐字稿、中文逐段翻译、时间戳联动，以及围绕 π0、π0.5、Hi Robot、FAST、memory、world model 与 post-training 的研究注释。",
+    "speaker": "Chelsea Finn",
     "date": "June 17, 2025",
     "duration": "44:52",
     "videoId": "a8-QsBHoH94",
     "videoUrl": "https://www.youtube.com/watch?v=a8-QsBHoH94",
-    "speaker": "Chelsea Finn",
     "venue": "Y Combinator AI Startup School, San Francisco",
-    "sourceNote": "English transcript supplied by the reader from a TextPurr transcript copy. Chinese translation and research annotations are study notes.",
+    "contentKind": "Full bilingual transcript",
+    "sourceLabel": "Original YouTube talk",
+    "sourceUrl": "https://www.youtube.com/watch?v=a8-QsBHoH94",
+    "sourceNote": "The English transcript was supplied by the reader from a third-party transcript copy. Chinese translation and research annotations are study notes. Original talk and video rights remain with their respective owners.",
+    "startLabel": "Start the 2025 reader",
+    "randomLabel": "Jump to a key idea",
+    "route": [
+      "Generalist model",
+      "Data scale",
+      "π0 capability",
+      "π0.5 generalization",
+      "Hi Robot interaction",
+      "RL / world models / FAST"
+    ],
+    "keyInsights": [
+      "memory-hypotheses",
+      "posttraining-breakthrough",
+      "pi0-architecture",
+      "knowledge-insulation",
+      "hi-robot",
+      "qa-world-model",
+      "qa-synthetic",
+      "qa-academia-fast"
+    ],
     "paperSources": [
       {
+        "year": "2024",
         "label": "π0",
-        "url": "https://www.physicalintelligence.company/download/pi0.pdf"
+        "url": "https://www.pi.website/blog/pi0",
+        "note": "Generalist VLA, cross-embodiment pretraining, flow-matching action expert, and dexterous long-horizon tasks."
       },
       {
-        "label": "π0.5",
-        "url": "https://www.physicalintelligence.company/download/pi05.pdf"
-      },
-      {
-        "label": "Hi Robot",
-        "url": "https://www.physicalintelligence.company/download/hirobot.pdf"
-      },
-      {
+        "year": "2025",
         "label": "FAST",
-        "url": "https://www.physicalintelligence.company/download/fast.pdf"
+        "url": "https://www.pi.website/research/fast",
+        "note": "Efficient tokenization for high-frequency autoregressive robot action sequences."
+      },
+      {
+        "year": "2025",
+        "label": "Hi Robot",
+        "url": "https://www.pi.website/research/hirobot",
+        "note": "Hierarchical VLA for open-ended instructions, interjections, and situated corrections."
+      },
+      {
+        "year": "2025",
+        "label": "π0.5",
+        "url": "https://www.pi.website/blog/pi05",
+        "note": "Open-world generalization through heterogeneous co-training and hybrid action representations."
       }
-    ]
+    ],
+    "footer": {
+      "title": "Study companion",
+      "note": "This page combines a supplied English transcript with original Chinese translation and research annotations. Claims attributed to the talk are separated from supplemental interpretation wherever possible.",
+      "links": [
+        {
+          "label": "Original video ↗",
+          "url": "https://www.youtube.com/watch?v=a8-QsBHoH94"
+        },
+        {
+          "label": "Physical Intelligence ↗",
+          "url": "https://www.pi.website/research"
+        }
+      ]
+    }
   },
   "chapters": [
     {
@@ -149,6 +200,14 @@ window.TALK_DATA = {
         "Memory",
         "Hierarchy",
         "Research Method"
+      ],
+      "crossLinks": [
+        {
+          "kicker": "Then → Now · 2026",
+          "title": "Multi-timescale memory becomes a system",
+          "href": "../2026-next-decade/#chapter-multi-timescale-memory",
+          "note": "短期视频保留运动细节，长期文本记录任务进度；memory 从候选失败假设变成明确架构。"
+        }
       ]
     },
     {
@@ -352,6 +411,14 @@ window.TALK_DATA = {
         "Evaluation",
         "Generalization",
         "Partial Observability"
+      ],
+      "crossLinks": [
+        {
+          "kicker": "Then → Now · 2026",
+          "title": "From unseen homes to compositional generalization",
+          "href": "../2026-next-decade/#chapter-compositional-generalization",
+          "note": "评价从环境分布偏移扩展到 task × object 与 task × embodiment 的未见组合。"
+        }
       ]
     },
     {
@@ -460,6 +527,14 @@ window.TALK_DATA = {
         "RL",
         "Post-training",
         "Online Learning"
+      ],
+      "crossLinks": [
+        {
+          "kicker": "Then → Now · 2026",
+          "title": "RECAP learns from deployment experience",
+          "href": "../2026-next-decade/#chapter-learning-from-failures",
+          "note": "2025 的 online-RL 判断，在 2026 变成 interventions、跨任务 value model 与 autonomous experience 的闭环。"
+        }
       ]
     },
     {
@@ -485,6 +560,14 @@ window.TALK_DATA = {
         "World Model",
         "VLA",
         "Infrastructure"
+      ],
+      "crossLinks": [
+        {
+          "kicker": "Then → Now · 2026",
+          "title": "World models generate visual subgoals for π0.7",
+          "href": "../2026-next-decade/#chapter-all-data-context",
+          "note": "未来图像从 Q&A 里的风险与可能性，发展为 steerable VLA 的 subgoal-image conditioning。"
+        }
       ]
     },
     {
