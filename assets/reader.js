@@ -87,7 +87,7 @@
 
     <section class="video-band shell" aria-label="Video companion">
       <div class="video-card">
-        <div class="video-copy"><div class="eyebrow">Video companion</div><h2>从研究笔记跳回原始语境</h2><p>点击任意时间戳会把视频定位到该段开始。2026 页面使用官方章节边界；2025 页面保留逐段时间戳。</p><div id="nowPlaying" class="now-playing">${esc(data.segments[0].time)} · ${esc(data.chapters[0].zhTitle)}</div></div>
+        <div class="video-copy"><div class="eyebrow">Video companion</div><h2>回到演讲的原始语境</h2><p>点击时间戳即可从对应位置播放视频。2026 按官方章节切分；2025 保留逐段时间戳。</p><div id="nowPlaying" class="now-playing">${esc(data.segments[0].time)} · ${esc(data.chapters[0].zhTitle)}</div></div>
         <div class="video-frame-wrap"><iframe id="videoFrame" class="video-frame" src="https://www.youtube-nocookie.com/embed/${esc(meta.videoId)}?rel=0" title="${esc(meta.titleFocus)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
       </div>
     </section>
@@ -106,7 +106,7 @@
     </main>
 
     <nav class="talk-steps shell" aria-label="Previous and next talks">${prevNextHtml}</nav>
-    <section class="paper-map shell"><div class="section-heading"><div class="eyebrow">Paper map · official sources</div><h2>把这一场演讲放回 PI 的研究路线</h2><p>演讲主张与论文补充在研究卡片中分开表达；这里仅链接 PI 官方研究页或论文。</p></div><div class="paper-grid">${paperCards}</div></section>
+    <section class="paper-map shell"><div class="section-heading wide-heading"><div class="eyebrow">Paper map · official sources</div><h2>从这场演讲延伸到 PI 的相关研究</h2><p>下列研究工作补充演讲中的背景；链接仅指向 PI 官方研究页、官方论文或 arXiv 项目页。</p></div><div class="paper-grid">${paperCards}</div></section>
     <footer class="footer shell"><div><strong>${esc(meta.footer.title)}</strong><p>${esc(meta.footer.note)}</p><p class="source-note">${esc(meta.sourceNote)}</p></div><div class="footer-links">${footerLinks}<a href="../../compare/">Compare 2025 → 2026</a><a href="#top">Back to top ↑</a></div></footer>`;
 
   const els = {
