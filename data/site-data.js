@@ -3,7 +3,7 @@ window.SITE_DATA = {
   "shortBrand": "PI Research Reader",
   "titleLead": "Two talks.",
   "titleFocus": "One evolving research program.",
-  "deck": "把 Chelsea Finn 2025 与 2026 的两次演讲映射到 Physical Intelligence 的公开论文：沿着模型主线阅读，也可以按训练、泛化、部署学习与记忆四类问题交叉对照。",
+  "deck": "把 Chelsea Finn 在 2025 和 2026 年的两场演讲与 Physical Intelligence 的公开论文放进同一阅读框架：既可沿模型主线纵向阅读，也可围绕训练、泛化、部署学习与记忆横向对照。",
   "talks": [
     {
       "slug": "2025-building-robots",
@@ -35,23 +35,23 @@ window.SITE_DATA = {
   "research": {
     "overview": {
       "eyebrow": "Research evolution",
-      "title": "从通用动作模型，到可部署的通用机器人系统。",
-      "description": "两场演讲对应同一研究计划的两个观察窗口：2025 聚焦能力、训练效率、泛化与层级控制；2026 聚焦部署经验回流、长程状态，以及多种能力如何进入同一个可控策略。",
+      "title": "从通用动作模型走向可部署的机器人系统",
+      "description": "两场演讲展示了同一研究路线在不同阶段的重点：2025 关注动作能力、训练效率、开放世界泛化与层级控制；2026 转向部署经验回流、长程状态，以及如何把多种能力整合进同一个可控策略。",
       "linkLabel": "Open the four-track comparison →",
       "steps": [
-        {"label":"先建立通用动作底座","detail":"π0 把多机器人、多任务数据接入同一个 VLA，并用 flow-matching action expert 输出连续动作。"},
-        {"label":"再解决训练与泛化","detail":"FAST 改进动作表示；Hi Robot 引入层级语言控制；π0.5 将这些方法用于开放世界泛化。"},
-        {"label":"把部署变成训练数据","detail":"RECAP 利用示范、纠错、自主尝试与结果反馈优化成功率和吞吐量。"},
-        {"label":"扩展长程状态并统一数据","detail":"MEM 研究多时间尺度记忆；π0.7 用多模态条件整合异质数据与部署经验。"}
+        {"label":"建立通用动作底座","detail":"π0 用一个 VLA 学习多机器人、多任务数据，并通过 flow-matching action expert 输出连续动作。"},
+        {"label":"提高训练效率与泛化能力","detail":"FAST 改进动作表示，Hi Robot 引入层级语言控制，π0.5 进一步面向开放世界泛化。"},
+        {"label":"让部署经验回流训练","detail":"RECAP 将示范、人类纠正、自主尝试和结果反馈纳入训练，以提升真实部署中的成功率和吞吐量。"},
+        {"label":"处理长程状态，整合异质数据","detail":"MEM 研究多时间尺度记忆；π0.7 则用多模态条件组织不同来源、不同质量的数据与部署经验。"}
       ]
     },
     "map": {
       "eyebrow": "Official paper map · verified dates",
-      "title": "一条模型主线，五条方法与系统分支。",
-      "description": "主线是本站依据公开版本与研究目标整理的阅读顺序；分支表示被模型采用、在模型上评估，或提供训练经验的方法。关系强度由证据状态明确标注。",
+      "title": "一条模型主线，五条方法与系统分支",
+      "description": "主线按公开版本和研究目标组织；分支收纳动作表示、层级控制、训练方法、部署学习与记忆研究。每条关系都标注证据强度，避免把阅读线索误作官方继承关系。",
       "mainlineLabel": "Model line",
       "branchLabel": "Method / system branches",
-      "branchDescription": "分支分别处理动作表示、层级交互、训练机制、部署学习与长程记忆；它们不构成彼此之间的版本继承。",
+      "branchDescription": "这些工作解决不同层面的问题；它们与主版本的关系，以各自的关系类型和证据标记为准。",
       "sourceNote": "日期采用 Physical Intelligence 官方发布日期；来源只链接 PI 官方页面、官方论文与 arXiv。"
     },
     "confidenceLabels": {
@@ -117,7 +117,7 @@ window.SITE_DATA = {
   "compare": {
     "route": "compare/",
     "title": "One Year of Physical Intelligence",
-    "subtitle": "2025 → 2026：四条研究路线如何从假设、配方和 demo 发展为部署指标、系统模块与新的泛化证据。",
+    "subtitle": "沿四条问题线索对照 2025 与 2026：部署经验如何进入训练，记忆与视觉子目标如何进入系统，泛化目标又如何扩展。",
     "tracks": [
       {
         "id":"rl-experience",
