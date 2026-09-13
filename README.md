@@ -18,7 +18,7 @@ Direct routes:
 - synchronized YouTube seeking, bilingual / English / Chinese views, search, topic filters, progress, focus mode, and dark mode
 - bidirectional 2025 ↔ 2026 links for memory, reinforcement learning, world models, and generalization
 - a four-track comparison page with technical shifts, remaining bottlenecks, exact chapter links, and official paper sources
-- paper mapping across π0, FAST, Hi Robot, π0.5, Knowledge Insulation, π*0.6 / RECAP, Memory, and π0.7
+- a provenance-aware research graph across π0, FAST, Hi Robot, π0.5, Knowledge Insulation, π*0.6 / RECAP, MEM, and π0.7
 
 ## Preview locally
 
@@ -52,7 +52,17 @@ Shared runtime files live in `assets/`:
 - `compare.js`: year-over-year comparison
 - `styles.css`: shared responsive visual system
 
-Site-level talk cards, comparison tracks, and the consolidated paper map live in `data/site-data.js`.
+Site-level data lives in `data/site-data.js` and is separated by meaning:
+
+- `talks`: talk-level navigation and summaries
+- `research.works`: canonical research-work metadata and official sources
+- `research.relations`: typed links between works, each with evidence provenance and confidence
+- `research.concepts`: reusable research questions such as memory, RL, compositionality, and world models
+- `compare.tracks`: four talk-to-talk comparisons that reference canonical works by ID
+
+The homepage paper map and Compare reading lists both resolve their labels, dates, summaries, and URLs from the same research graph.
+
+Relation types keep different claims separate: `version-successor` marks an explicitly supported model-generation succession; `research-line-successor` marks a later node in the same research or model family without claiming direct architectural inheritance; `builds-on` primarily means an implementation explicitly extends a prior system; `applied-to` means a method was combined with or tested on a model; `adopted-by` is reserved for an explicitly incorporated method; `builds-on-concept` records strongly supported conceptual continuity without claiming full architectural inheritance; and `related-method` records a reader interpretation rather than an official integration claim.
 
 After editing talk JSON, regenerate both browser bundles:
 
@@ -61,6 +71,12 @@ python3 scripts/build_data.py
 ```
 
 The build script validates translation indices, non-overlapping chapter ranges, and complete segment coverage before writing `talk-data.js`.
+
+Validate the research graph, Compare references, and relative HTML entrypoints with:
+
+```bash
+node scripts/check_site.mjs
+```
 
 ## GitHub Pages
 
